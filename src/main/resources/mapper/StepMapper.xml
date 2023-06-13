@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chengmo.mapper.StepMapper">
+
+    <sql id="StepDO">
+        id, page_id, case_id, step_number, step_name, operation_type, operation, operation_value, element_type, element, element_index, expected, status, description
+    </sql>
+
+    <select id="findById" resultType="com.chengmo.pojo.Step">
+        select
+        <include refid="StepDO"/>
+        from test_step where id = #{id} and status = 1 and deleted = 0;
+    </select>
+
+    <select id="findByCaseId" resultType="com.chengmo.pojo.Step">
+        select
+        <include refid="StepDO"/>
+        from test_step where case_id = #{caseId} and status = 1 and deleted = 0 order by id asc;
+    </select>
+
+</mapper>

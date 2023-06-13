@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chengmo.mapper.AppiumClientMapper">
+
+    <sql id="AppiumClientDO">
+        id, device_name, platform, platform_version, platform_name, udid, bundle_id, app_package, app_activity, no_reset, new_command_timeout, implicitly_wait, description
+    </sql>
+
+    <select id="findById" resultType="com.chengmo.appium.AppiumClient">
+        select
+        <include refid="AppiumClientDO"/>
+        from appium_client where id = #{id} and deleted = 0;
+    </select>
+
+    <select id="findByPlatform" resultType="com.chengmo.appium.AppiumClient">
+        select
+        <include refid="AppiumClientDO"/>
+        from appium_client where platform = #{platform} and deleted = 0;
+    </select>
+
+    <select id="findAll" resultType="com.chengmo.appium.AppiumClient">
+        select
+        <include refid="AppiumClientDO"/>
+        from appium_client where deleted = 0;
+    </select>
+
+    <insert id="addAppiumClient">
+        insert into appium_client
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deviceName != null and deviceName != ''">device_name,</if>
+            <if test="platform != null">platform,</if>
+            <if test="platformVersion != null and platformVersion != ''">platform_version,</if>
+            <if test="platformName != null and platformName != ''">platform_name,</if>
+            <if test="udid != null and udid != ''">udid,</if>
+            <if test="bundleId != null and bundleId != ''">bundle_id,</if>
+            <if test="appPackage != null and appPackage != ''">app_package,</if>
+            <if test="appActivity != null and appActivity != ''">app_activity,</if>
+            <if test="description != null and description != ''">description,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+        </trim>
+        values
+        <trim prefix=" (" suffix=")" suffixOverrides=",">
+            <if test="deviceName != null and deviceName != ''">#{deviceName},</if>
+            <if test="platform != null">#{platform},</if>
+            <if test="platformVersion != null and platformVersion != ''">#{platformVersion},</if>
+            <if test="platformName != null and platformName != ''">#{platformName},</if>
+            <if test="udid != null and udid != ''">#{udid},</if>
+            <if test="bundleId != null and bundleId != ''">#{bundleId},</if>
+            <if test="appPackage != null and appPackage != ''">#{appPackage},</if>
+            <if test="appActivity != null and appActivity != ''">#{appActivity},</if>
+            <if test="description != null and description != ''">#{description},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateAppiumClient">
+        update appium_client
+        <trim prefix="set" suffixOverrides=",">
+            <if test="deviceName != null and deviceName != ''">device_name = #{deviceName},</if>
+            <if test="platform != null">platform = #{platform},</if>
+            <if test="platformVersion != null and platformVersion != ''">platform_version = #{platformVersion},</if>
+            <if test="platformName != null and platformName != ''">platform_name = #{platformName},</if>
+            <if test="udid != null and udid != ''">udid = #{udid},</if>
+            <if test="bundleId != null and bundleId != ''">bundle_id = #{bundleId},</if>
+            <if test="appPackage != null and appPackage != ''">app_package = #{appPackage},</if>
+            <if test="appActivity != null and appActivity != ''">app_activity = #{appActivity},</if>
+            <if test="noReset != null">no_reset = #{noReset},</if>
+            <if test="newCommandTimeout != null">new_command_timeout = #{newCommandTimeout},</if>
+            <if test="implicitlyWait != null">implicitly_wait = #{implicitlyWait},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deleteAppiumClientById">
+        update appium_client
+        set deleted = 1
+        where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

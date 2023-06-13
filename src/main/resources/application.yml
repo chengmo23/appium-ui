@@ -1,0 +1,17 @@
+################################################## JDBC 通用配置  ##########################################
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:60000/appium?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    cache: false
+
+
+###################################### MyBatis 配置 ######################################
+mybatis:
+  mapper-locations: classpath*:/mapper/*Mapper.xml    # 配置Mapper映射文件
+  type-aliases-package: com.chengmo.appium,com.chengmo.pojo            # 配置MyBatis数据返回类型别名（默认别名是类名）
+  configuration:
+    map-underscore-to-camel-case: true                # 自动驼峰命名
