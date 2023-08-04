@@ -6,13 +6,13 @@
         id, page_id, case_id, step_number, step_name, operation_type, operation, operation_value, element_type, element, element_index, expected, status, description
     </sql>
 
-    <select id="findById" resultType="com.chengmo.pojo.Step">
+    <select id="findById" resultType="com.chengmo.app.Element">
         select
         <include refid="StepDO"/>
         from test_step where id = #{id} and status = 1 and deleted = 0;
     </select>
 
-    <select id="findByCaseId" resultType="com.chengmo.pojo.Step">
+    <select id="findByCaseId" resultType="com.chengmo.app.Element">
         select
         <include refid="StepDO"/>
         from test_step where case_id = #{caseId} and status = 1 and deleted = 0 order by id asc;

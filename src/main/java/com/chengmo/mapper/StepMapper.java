@@ -1,6 +1,6 @@
 package com.chengmo.mapper;
 
-import com.chengmo.pojo.Step;
+import com.chengmo.app.Element;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface StepMapper {
 
-    Step findById(int id);
+    Element findById(int id);
 
-    List<Step> findByCaseId(int caseId);
+    List<Element> findByCaseId(int caseId);
 }

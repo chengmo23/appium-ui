@@ -1,4 +1,4 @@
-package com.chengmo.pojo;
+package com.chengmo.app;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,14 +11,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Page {
+public class Element {
 
     private Integer id;
-    private String pageName;
-    private Integer pageLevel;
-    private Integer moduleId;
+    private Integer platform;
+    private String elementName;
+    private String byType;
+    private String elementValue;
+    private Integer pageId;
+    private Boolean status;
     private String description;
-    private Integer orderNum;
     private String createBy;
     private String updateBy;
+
 }

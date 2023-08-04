@@ -15,7 +15,12 @@ public class AppiumHost {
     private int port;
 
     public AppiumHost(){
-        this.ip = "0.0.0.0";
+        this.ip = "127.0.0.1";
         this.port = 4723;
+    }
+
+    public AppiumHost(int port) {
+        this.ip = "127.0.0.1";
+        this.port = port;
     }
 }

@@ -17,22 +17,17 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 public class AppiumServer {
 
-    public static AppiumDriverLocalService run(int port) {
+    public static AppiumDriverLocalService run() {
         AppiumDriverLocalService service = null;
         try{
-            service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-                    .withIPAddress("0.0.0.0")
-                    .usingPort(port)
-                    .withArgument(() -> "--base-path", "/wd/hub")
-                    .withArgument(GeneralServerFlag.LOG_LEVEL, "error")
-                    .withArgument(GeneralServerFlag.SESSION_OVERRIDE));
+            service = AppiumDriverLocalService.buildDefaultService();
             service.start();
             log.info("Appium server start...");
 
             if (!service.isRunning()){
                log.warn("Could not start REST http interface listener.");
             }else{
-                log.info("Appium REST http interface listener started on {}:{}", "0.0.0.0", port);
+                log.info("Appium REST http interface listener started on {}", service.getUrl());
                 service.clearOutPutStreams();
                 service.enableDefaultSlf4jLoggingOfOutputData();
             }
@@ -50,7 +45,6 @@ public class AppiumServer {
             service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
                     .withIPAddress(ip)
                     .usingPort(port)
-                    .withArgument(() -> "--base-path", "/wd/hub")
                     .withArgument(GeneralServerFlag.LOG_LEVEL, "error")
                     .withArgument(GeneralServerFlag.SESSION_OVERRIDE));
             service.start();

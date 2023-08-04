@@ -41,6 +41,7 @@ public class AppiumClient {
         capabilitiesMap.put("deviceName", deviceName);
         capabilitiesMap.put("platformName", platformName);
         capabilitiesMap.put("platformVersion", platformVersion);
+        capabilitiesMap.put("automationName", platform == 1 ? "XCUITest" : "UiAutomator2");
         capabilitiesMap.put("udid", udid);
         capabilitiesMap.put("bundleId", bundleId);
         capabilitiesMap.put("appPackage", appPackage);
