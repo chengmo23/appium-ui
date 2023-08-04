@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * Create by chengmo at 2022/10/21
  */
@@ -22,5 +24,7 @@ public class Page {
     private String description;
     private Integer orderNum;
     private String createBy;
+    private Date createdAt;
     private String updateBy;
+    private Date updatedAt;
 }

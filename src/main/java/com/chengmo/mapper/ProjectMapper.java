@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface ProjectMapper {
 
-    Project findByProjectName(String projectName);
+    List<Project> findByProjectName(String projectName);
 
     List<Project> findAll();
 

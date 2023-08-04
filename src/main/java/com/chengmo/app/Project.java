@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * Create by chengmo at 2022/10/21
  */
@@ -18,6 +20,7 @@ public class Project {
     private Integer projectType;
     private String description;
     private String createBy;
+    private Date createdAt;
     private String updateBy;
-
+    private Date updatedAt;
 }

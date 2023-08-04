@@ -3,23 +3,23 @@
 <mapper namespace="com.chengmo.mapper.ProjectMapper">
 
     <sql id="ProjectDO">
-        id, project_name, project_type, description
+        id, project_name, project_type, description, create_by, created_at, update_by, updated_at
     </sql>
 
     <select id="findByProjectName" resultType="com.chengmo.app.Project">
         select
         <include refid="ProjectDO"/>
-        from appium_prject where project_name = #{projectName} and deleted = 0;
+        from app_project where project_name like concat('%',#{projectName},'%') and deleted = 0;
     </select>
 
     <select id="findAll" resultType="com.chengmo.app.Project">
         select
         <include refid="ProjectDO"/>
-        from appium_prject where deleted = 0;
+        from app_project where deleted = 0;
     </select>
 
     <insert id="addProject">
-        insert into appium_prject
+        insert into app_project
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="projectName != null and projectName != ''">project_name,</if>
             <if test="projectType != null">project_type,</if>
@@ -36,7 +36,7 @@
     </insert>
 
     <update id="updateProject">
-        update appium_prject
+        update app_project
         <trim prefix="set" suffixOverrides=",">
             <if test="projectName != null and projectName != ''">project_name = #{projectName},</if>
             <if test="projectType != null">project_type = #{projectType},</if>
@@ -47,7 +47,7 @@
     </update>
 
     <update id="deleteProjectById">
-        update appium_prject
+        update app_project
         set deleted = 1
         where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
