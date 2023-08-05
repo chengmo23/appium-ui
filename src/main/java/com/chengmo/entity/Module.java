@@ -1,5 +1,6 @@
-package com.chengmo.app;
+package com.chengmo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,19 +14,17 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Element {
+public class Module {
 
     private Integer id;
-    private Integer platform;
-    private String elementName;
-    private String byType;
-    private String elementValue;
-    private Integer pageId;
-    private Boolean status;
+    private String moduleName;
+    private Integer projectId;
     private String description;
+    private Integer orderNum;
     private String createBy;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
     private String updateBy;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updatedAt;
-
 }

@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 
 
@@ -32,7 +33,7 @@ public class DriverImpl implements DriverService {
     @Override
     public AppiumDriver initAppiumDriver(int appiumClientId, AppiumHost appiumHost) throws MalformedURLException {
 
-        AppiumClient clientCapabilities = appiumClientMapper.findById(appiumClientId);
+        AppiumClient clientCapabilities = appiumClientMapper.findByAppiumClientId(appiumClientId);
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         for (Map.Entry<String, Object> entry : clientCapabilities.getCapabilitiesMap().entrySet()) {

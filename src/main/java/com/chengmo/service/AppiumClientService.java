@@ -1,16 +1,13 @@
-package com.chengmo.mapper;
+package com.chengmo.service;
 
 import com.chengmo.appium.AppiumClient;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
- * Create by chengmo at 2022/10/21
+ * Create by chengmo at 2023/08/05
  */
-
-@Mapper
-public interface AppiumClientMapper {
+public interface AppiumClientService {
     AppiumClient findByAppiumClientId(int appiumClientId);
 
     List<AppiumClient> findByPlatform(int platform);

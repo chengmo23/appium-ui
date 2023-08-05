@@ -1,4 +1,4 @@
-package com.chengmo.pojo;
+package com.chengmo.todo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,20 +11,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Task {
+public class Case {
 
     private Integer id;
-    private String taskName;
-    private Integer jobId;
-    private Integer projectId;
-    private Integer planId;
-    private Integer appiumClientId;
-    private Integer timeout;
-    private Integer noticeType;
-    private String noticeAddress;
+    private String caseName;
     private String description;
     private Integer orderNum;
     private String createBy;
     private String updateBy;
-
 }

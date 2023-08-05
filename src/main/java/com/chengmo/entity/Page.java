@@ -1,5 +1,6 @@
-package com.chengmo.pojo;
+package com.chengmo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,14 +18,16 @@ public class Page {
 
     private Integer id;
     private String pageName;
-    private Integer index;
+    private Integer pageIndex;
     private Integer hasMenuBar;
-    private Integer hsaTabBar;
+    private Integer hasTabBar;
     private Integer moduleId;
     private String description;
     private Integer orderNum;
     private String createBy;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
     private String updateBy;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updatedAt;
 }

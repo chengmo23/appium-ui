@@ -1,6 +1,6 @@
 package com.chengmo.service.impl;
 
-import com.chengmo.app.Project;
+import com.chengmo.entity.Project;
 import com.chengmo.mapper.ProjectMapper;
 import com.chengmo.service.ProjectService;
 import org.springframework.stereotype.Service;
@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * Create by chengmo at 2023/08/04
+ */
 @Service
 public class ProjectImpl implements ProjectService {
 
@@ -15,13 +18,8 @@ public class ProjectImpl implements ProjectService {
     private ProjectMapper projectMapper;
 
     @Override
-    public List<Project> findByProjectName(String projectName) {
-        return projectMapper.findByProjectName(projectName);
-    }
-
-    @Override
-    public List<Project> findAll() {
-        return projectMapper.findAll();
+    public List<Project> findAll(Project project) {
+        return projectMapper.findAll(project);
     }
 
     @Override
@@ -35,7 +33,7 @@ public class ProjectImpl implements ProjectService {
     }
 
     @Override
-    public boolean deleteProjectById(Integer[] ids) {
-        return projectMapper.deleteProjectById(ids);
+    public boolean deleteProjectByIds(Integer[] ids) {
+        return projectMapper.deleteProjectByIds(ids);
     }
 }

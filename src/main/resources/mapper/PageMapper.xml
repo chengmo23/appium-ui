@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chengmo.mapper.PageMapper">
+
+    <sql id="PageDO">
+        id, page_name, page_index, order_num, has_menu_bar, has_tab_bar, module_id, description, create_by, created_at, update_by, updated_at
+    </sql>
+
+    <select id="findAll" resultType="com.chengmo.entity.Page">
+        select
+        <include refid="PageDO"/>
+        from app_page where deleted = 0
+        <if test="moduleId != null">
+            and module_id like concat('%',#{moduleId},'%')
+        </if>
+        order by order_num asc;
+    </select>
+
+    <insert id="addPage">
+        insert into app_page
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pageName != null and pageName != ''">page_name,</if>
+            <if test="pageIndex != null">page_index,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="hasMenuBar != null">has_menu_bar,</if>
+            <if test="hasTabBar != null">has_tab_bar,</if>
+            <if test="moduleId != null">module_id,</if>
+            <if test="description != null and description != ''">description,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+        </trim>
+        values
+        <trim prefix=" (" suffix=")" suffixOverrides=",">
+            <if test="pageName != null and pageName != ''">#{pageName},</if>
+            <if test="pageIndex != null">#{pageIndex},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="hasMenuBar != null">#{hasMenuBar},</if>
+            <if test="hasTabBar != null">#{hasTabBar},</if>
+            <if test="moduleId != null">#{moduleId},</if>
+            <if test="description != null and description != ''">#{description},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePage">
+        update app_page
+        <trim prefix="set" suffixOverrides=",">
+            <if test="pageName != null and pageName != ''">page_name = #{pageName},</if>
+            <if test="pageIndex != null">page_index = #{pageIndex},</if>
+            <if test="hasMenuBar != null">has_menu_bar = #{hasMenuBar},</if>
+            <if test="hasTabBar != null">has_tab_bar = #{hasTabBar},</if>
+            <if test="moduleId != null">module_id = #{moduleId},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deletePageByIds">
+        update app_page
+        set deleted = 1
+        where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

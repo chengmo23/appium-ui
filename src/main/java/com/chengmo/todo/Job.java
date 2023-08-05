@@ -1,4 +1,4 @@
-package com.chengmo.pojo;
+package com.chengmo.todo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Plan {
+public class Job {
 
     private Integer id;
-    private String planName;
-    private Integer ProjectId;
+    private String jobName;
+    private String cronExpression;
+    private Integer status;
     private String description;
     private Integer orderNum;
     private String createBy;

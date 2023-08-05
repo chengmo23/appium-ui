@@ -1,6 +1,6 @@
 package com.chengmo.mapper;
 
-import com.chengmo.app.Project;
+import com.chengmo.entity.Project;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,15 +11,12 @@ import java.util.List;
 
 @Mapper
 public interface ProjectMapper {
-
-    List<Project> findByProjectName(String projectName);
-
-    List<Project> findAll();
+    List<Project> findAll(Project project);
 
     boolean addProject(Project project);
 
     boolean updateProject(Project project);
 
-    boolean deleteProjectById(Integer[] ids);
+    boolean deleteProjectByIds(Integer[] ids);
 
 }

@@ -1,19 +1,16 @@
 package com.chengmo.controller;
 
-import com.chengmo.app.Project;
+import com.chengmo.entity.Project;
+import com.chengmo.common.ResultBean;
 import com.chengmo.service.ProjectService;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Create by chengmo at 2023/08/04
  */
-@Log4j2
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
@@ -22,31 +19,34 @@ public class ProjectController {
     private ProjectService projectService;
 
     @PostMapping("/list")
-    List<Project> projectList(@RequestBody Project project) {
-        log.info(project.getProjectName());
-        if (project.getProjectName() == null || project.getProjectName().isEmpty()){
-            return projectService.findAll();
-        } else {
-            log.info("byName");
-            return projectService.findByProjectName(project.getProjectName());
-        }
+    public ResultBean<List<Project>> projectList(@RequestBody Project project) {
+        return ResultBean.success(projectService.findAll(project));
     }
 
     @PostMapping("/add")
-    boolean addProject(@RequestBody Project project){
-        log.info(project);
-        return projectService.addProject(project);
+    public ResultBean<Boolean> addProject(@RequestBody Project project){
+        if (projectService.addProject(project)) {
+            return ResultBean.success();
+        } else {
+            return ResultBean.failed();
+        }
     }
 
     @PostMapping("/update")
-    boolean updateProject(@RequestBody Project project){
-        log.info(project);
-        return projectService.updateProject(project);
+    public ResultBean<Boolean> updateProject(@RequestBody Project project){
+        if (projectService.updateProject(project)) {
+            return ResultBean.success();
+        } else {
+            return ResultBean.failed();
+        }
     }
 
     @PostMapping("/delete")
-    boolean deleteProjectById(@RequestBody Integer[] ids){
-        log.info(Arrays.toString(ids));
-        return projectService.deleteProjectById(ids);
+    public ResultBean<Boolean> deleteProjectById(@RequestBody Integer[] ids){
+        if (projectService.deleteProjectByIds(ids)) {
+            return ResultBean.success();
+        } else {
+            return ResultBean.failed();
+        }
     }
 }

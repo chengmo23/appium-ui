@@ -1,10 +1,8 @@
-package com.chengmo.app;
+package com.chengmo.todo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 /**
  * Create by chengmo at 2022/10/21
@@ -13,15 +11,14 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Module {
+public class Plan {
 
     private Integer id;
-    private String moduleName;
-    private Integer projectId;
+    private String planName;
+    private Integer ProjectId;
     private String description;
     private Integer orderNum;
     private String createBy;
-    private Date createdAt;
     private String updateBy;
-    private Date updatedAt;
+
 }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chengmo.mapper.ElementMapper">
+
+    <sql id="ElementDO">
+        id, platform, element_name, locator_type, locator_value, order_num, page_id, status, description, create_by, created_at, update_by, updated_at
+    </sql>
+
+    <select id="findAll" resultType="com.chengmo.entity.Element">
+        select
+        <include refid="ElementDO"/>
+        from app_element where deleted = 0
+        <if test="pageId != null">
+            and page_id = #{pageId}
+        </if>
+        <if test="platform != null">
+            and platform = #{platform}
+        </if>
+        order by order_num;
+    </select>
+
+    <insert id="addElement">
+        insert into app_element
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="platform != null">platform,</if>
+            <if test="elementName != null and elementName != ''">element_name,</if>
+            <if test="locatorType != null and locatorType != ''">locator_type,</if>
+            <if test="locatorValue != null and locatorValue != ''">locator_value,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="pageId != null">page_id,</if>
+            <if test="status != null">status,</if>
+            <if test="description != null and description != ''">description,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+        </trim>
+        values
+        <trim prefix=" (" suffix=")" suffixOverrides=",">
+            <if test="platform != null">#{platform},</if>
+            <if test="elementName != null and elementName != ''">#{elementName},</if>
+            <if test="locatorType != null and locatorType != ''">#{locatorType},</if>
+            <if test="locatorValue != null and locatorValue != ''">#{locatorValue},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="pageId != null">#{pageId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="description != null and description != ''">#{description},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateElement">
+        update app_element
+        <trim prefix="set" suffixOverrides=",">
+            <if test="elementName != null and elementName != ''">element_name = #{elementName},</if>
+            <if test="locatorType != null and locatorType != ''">locator_type = #{locatorType},</if>
+            <if test="locatorValue != null and locatorValue != ''">locator_value = #{locatorValue},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deleteElementByIds">
+        update app_element
+        set deleted = 1
+        where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

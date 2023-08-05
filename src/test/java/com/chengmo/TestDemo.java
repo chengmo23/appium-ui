@@ -4,7 +4,6 @@ import com.chengmo.appium.AppiumClient;
 import com.chengmo.appium.AppiumHost;
 import com.chengmo.appium.AppiumServer;
 import com.chengmo.mapper.AppiumClientMapper;
-import com.chengmo.mapper.StepMapper;
 import com.chengmo.service.DriverService;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -21,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 /**
  * Create by chengmo at 2022/10/18
@@ -79,7 +79,7 @@ public class TestDemo {
     @Test
     public void select() {
 
-        AppiumClient appiumClient = appiumClientMapper.findById(4);
+        AppiumClient appiumClient = appiumClientMapper.findByAppiumClientId(4);
         System.out.println(appiumClient);
 
     }
@@ -125,7 +125,7 @@ public class TestDemo {
 
     @Test
     public void delete() {
-        Boolean success =  appiumClientMapper.deleteAppiumClientById(new Integer[]{4});
+        Boolean success =  appiumClientMapper.deleteAppiumClientByIds(new Integer[]{4});
         System.out.println(success);
     }
 

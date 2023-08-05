@@ -1,8 +1,6 @@
 package com.chengmo.service;
 
-import com.chengmo.app.Project;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Service;
+import com.chengmo.entity.Project;
 
 import java.util.List;
 
@@ -10,16 +8,12 @@ import java.util.List;
  * Create by chengmo at 2023/08/04
  */
 public interface ProjectService {
-
-    List<Project> findByProjectName(String projectName);
-
-    List<Project> findAll();
+    List<Project> findAll(Project project);
 
     boolean addProject(Project project);
 
     boolean updateProject(Project project);
 
-    boolean deleteProjectById(Integer[] ids);
-
+    boolean deleteProjectByIds(Integer[] ids);
 
 }

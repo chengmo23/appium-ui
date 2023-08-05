@@ -6,16 +6,13 @@
         id, project_name, project_type, description, create_by, created_at, update_by, updated_at
     </sql>
 
-    <select id="findByProjectName" resultType="com.chengmo.app.Project">
+    <select id="findAll" resultType="com.chengmo.entity.Project">
         select
         <include refid="ProjectDO"/>
-        from app_project where project_name like concat('%',#{projectName},'%') and deleted = 0;
-    </select>
-
-    <select id="findAll" resultType="com.chengmo.app.Project">
-        select
-        <include refid="ProjectDO"/>
-        from app_project where deleted = 0;
+        from app_project where deleted = 0
+        <if test="projectName != null and projectName != ''">
+            and project_name like concat('%',#{projectName},'%')
+        </if>;
     </select>
 
     <insert id="addProject">
@@ -46,7 +43,7 @@
         where id = #{id}
     </update>
 
-    <update id="deleteProjectById">
+    <update id="deleteProjectByIds">
         update app_project
         set deleted = 1
         where id in
