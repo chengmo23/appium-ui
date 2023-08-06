@@ -549,4 +549,4 @@ def test_search(driver):
     assert "续航" == search_history[0]
 ```
 ### 6.运行效果
-![test.gif](https://cdn.nlark.com/yuque/0/2022/gif/23115155/1662016162615-8a806e82-6030-42f5-ade7-cdedae39c70b.gif#averageHue=%23070604&clientId=u792a1739-958b-4&from=ui&id=u95c5c800&originHeight=1080&originWidth=1920&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2390429&status=done&style=none&taskId=u0b6d2f0d-5479-4bf7-9a46-75aee85ba7b&title=)
+![test.gif](https://cdn.nlark.com/yuque/0/2022/gif/23115155/1662016162615-8a806e82-6030-42f5-ade7-cdedae39c70b.gif)
