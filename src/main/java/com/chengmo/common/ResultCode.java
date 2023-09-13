@@ -3,7 +3,7 @@ package com.chengmo.common;
 /**
  * Create by chengmo at 2023/08/05
  */
-public enum ResultCode implements IErrorCode{
+public enum ResultCode{
     SUCCESS(200, "操作成功"),
     FAILED(500, "操作失败"),
     VALIDATE_FAILED(404, "参数检验失败"),
@@ -16,12 +16,11 @@ public enum ResultCode implements IErrorCode{
         this.code = code;
         this.message = message;
     }
-    @Override
+
     public long getCode() {
         return code;
     }
 
-    @Override
     public String getMessage() {
         return message;
     }

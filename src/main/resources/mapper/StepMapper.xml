@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chengmo.mapper.StepMapper">
+
+    <sql id="StepDO">
+        id, order_num, element_id, step_action, step_value, status, case_id, description, create_by, created_at, update_by, updated_at
+    </sql>
+
+    <select id="findAll" resultType="com.chengmo.entity.Step">
+        select
+        <include refid="StepDO"/>
+        from test_step where deleted = 0
+        <if test="caseId != null">
+            and case_id = #{caseId}
+        </if>
+        order by order_num;
+    </select>
+
+    <insert id="addStep">
+        insert into test_step
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNum != null">order_num,</if>
+            <if test="elementId != null">element_id,</if>
+            <if test="stepAction != null and stepAction != ''">step_action,</if>
+            <if test="stepValue != null and stepValue != ''">step_value,</if>
+            <if test="status != null">status,</if>
+            <if test="caseId != null">case_id,</if>
+            <if test="description != null and description != ''">description,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+        </trim>
+        values
+        <trim prefix=" (" suffix=")" suffixOverrides=",">
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="elementId != null">#{elementId},</if>
+            <if test="stepAction != null and stepAction != ''">#{stepAction},</if>
+            <if test="stepValue != null and stepValue != ''">#{stepValue},</if>
+            <if test="status != null">#{status},</if>
+            <if test="caseId != null">#{caseId},</if>
+            <if test="description != null and description != ''">#{description},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateStep">
+        update test_step
+        <trim prefix="set" suffixOverrides=",">
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="elementId != null">element_id = #{elementId},</if>
+            <if test="stepAction != null and stepAction != ''">step_action = #{stepAction},</if>
+            <if test="stepValue != null and stepValue != ''">step_value = #{stepValue},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="caseId != null">case_id = #{caseId},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deleteStepByIds">
+        update test_step
+        set deleted = 1
+        where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

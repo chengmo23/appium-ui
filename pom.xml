@@ -71,6 +71,18 @@
             <artifactId>pagehelper</artifactId>
             <version>5.3.2</version>
         </dependency>
+        <!--swagger2 依赖 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <!--Swagger第三方ui依赖 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>1.9.6</version>
+        </dependency>
 
         <!--        <dependency>-->
 <!--            <groupId>commons-io</groupId>-->

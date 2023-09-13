@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chengmo.mapper.CaseMapper">
+
+    <sql id="CaseDO">
+        id, case_name, step_count, init_page_id, status, suit_id, description, create_by, created_at, update_by, updated_at
+    </sql>
+
+    <select id="findAll" resultType="com.chengmo.entity.Case">
+        select
+        <include refid="CaseDO"/>
+        from test_step where deleted = 0
+        <if test="suitId != null">
+            and suit_id = #{suitId}
+        </if>
+        <if test="pageId != null">
+            and case_name = #{caseName}
+        </if>
+    </select>
+
+    <insert id="addCase">
+        insert into test_step
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="caseName != null and caseName != ''">case_name,</if>
+            <if test="stepCount != null">stepCount,</if>
+            <if test="initPageId != null">init_page_id,</if>
+            <if test="status != null">status,</if>
+            <if test="suitId != null">suit_id,</if>
+            <if test="description != null and description != ''">description,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+        </trim>
+        values
+        <trim prefix=" (" suffix=")" suffixOverrides=",">
+            <if test="caseName != null and caseName != ''">#{caseName},</if>
+            <if test="stepCount != null">#{stepCount},</if>
+            <if test="initPageId != null">#{initPageId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="suitId != null">#{suitId},</if>
+            <if test="description != null and description != ''">#{description},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateCase">
+        update test_step
+        <trim prefix="set" suffixOverrides=",">
+            <if test="caseName != null and caseName != ''">case_name = #{caseName},</if>
+            <if test="stepCount != null">step_count = #{stepCount},</if>
+            <if test="initPageId != null">init_page_id = #{initPageId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="suitId != null">suit_id = #{suitId},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deleteCaseByIds">
+        update test_step
+        set deleted = 1
+        where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

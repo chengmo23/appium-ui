@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chengmo.mapper.SuitMapper">
+
+    <sql id="SuitDO">
+        id, suit_name, case_count, cleint_id, cleint_ip, description, create_by, created_at, update_by, updated_at
+    </sql>
+
+    <select id="findAll" resultType="com.chengmo.entity.Suit">
+        select
+        <include refid="SuitDO"/>
+        from test_step where deleted = 0
+        <if test="suitId != null">
+            and suit_id = #{suitId}
+        </if>
+        <if test="suitName != null">
+            and suit_name = #{suitName}
+        </if>
+    </select>
+
+    <insert id="addSuit">
+        insert into test_step
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suitName != null and suitName != ''">suit_name,</if>
+            <if test="caseCount != null">caseCount,</if>
+            <if test="clientId != null">client_id,</if>
+            <if test="clientIp != null">client_ip,</if>
+            <if test="description != null and description != ''">description,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+        </trim>
+        values
+        <trim prefix=" (" suffix=")" suffixOverrides=",">
+            <if test="suitName != null and suitName != ''">#{suitName},</if>
+            <if test="caseCount != null">#{caseCount},</if>
+            <if test="clientId != null">#{clientId},</if>
+            <if test="clientIp != null">#{clientIp},</if>
+            <if test="description != null and description != ''">#{description},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateSuit">
+        update test_step
+        <trim prefix="set" suffixOverrides=",">
+            <if test="suitName != null and suitName != ''">suit_name = #{suitName},</if>
+            <if test="caseCount != null">case_count = #{casepCount},</if>
+            <if test="clientId != null">client_id = #{clientId},</if>
+            <if test="clientIp != null">client_ip = #{clientIp},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deleteSuitByIds">
+        update test_step
+        set deleted = 1
+        where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>
