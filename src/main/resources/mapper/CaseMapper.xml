@@ -9,7 +9,7 @@
     <select id="findAll" resultType="com.chengmo.entity.Case">
         select
         <include refid="CaseDO"/>
-        from test_step where deleted = 0
+        from test_case where deleted = 0
         <if test="suitId != null">
             and suit_id = #{suitId}
         </if>
@@ -19,7 +19,7 @@
     </select>
 
     <insert id="addCase">
-        insert into test_step
+        insert into test_case
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="caseName != null and caseName != ''">case_name,</if>
             <if test="stepCount != null">stepCount,</if>
@@ -42,7 +42,7 @@
     </insert>
 
     <update id="updateCase">
-        update test_step
+        update test_case
         <trim prefix="set" suffixOverrides=",">
             <if test="caseName != null and caseName != ''">case_name = #{caseName},</if>
             <if test="stepCount != null">step_count = #{stepCount},</if>
@@ -56,7 +56,7 @@
     </update>
 
     <update id="deleteCaseByIds">
-        update test_step
+        update test_case
         set deleted = 1
         where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
